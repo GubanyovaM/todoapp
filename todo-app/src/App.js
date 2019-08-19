@@ -14,7 +14,9 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const todos = await axios.get('/todos.json');
+    const result = await axios.get('/todos');
+    this.setState({todos: result.data});
+   /* const todos = await axios.get('/todos.json');
     const result = [];
     console.log(todos);
    
@@ -25,7 +27,7 @@ class App extends Component {
     });
     this.setState({
       todos: result
-    });
+    });*/
   };
 
   addTodo = async todo => {
@@ -35,12 +37,17 @@ class App extends Component {
       finished: false
     };
 
-    const result = await axios.post('/todos.json', newTodo);
-    newTodo.id = result.data.name;
+    const result = await axios.post('/todos', newTodo);
+    newTodo.id = result.data;
 
-    this.setState(prevState => ({
+    this.setState(prevState =>  {
+      return {
+        todos: prevState.todos.concat(newTodo)
+      };
+    });
+      /*({
       todos: prevState.todos.concat(newTodo)
-    }));
+    }));*/
     
   };
 
