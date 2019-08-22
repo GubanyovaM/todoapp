@@ -18,6 +18,11 @@ class Navbar extends Component {
                             Add todo
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/addlabel">
+                            Labels
+                            </Link>
+                        </li>
                     
                     </ul>
                 </div>

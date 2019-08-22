@@ -7,6 +7,7 @@ import { HashRouter, Switch, Route } from 'react-router-dom';
 import AddTodo from './views/AddTodo';
 import TodoList from './views/TodoList';
 import Navbar from './components/Navbar';
+import AddLabel from './views/AddLabel';
 
 class App extends Component {
   state = {
@@ -37,10 +38,6 @@ class App extends Component {
      finished: false
     };
     
-
-    
-
-
     const result = await axios.post('/todos', newTodo);
     newTodo.id = result.data;
 
@@ -49,6 +46,21 @@ class App extends Component {
         todos: prevState.todos.concat(newTodo)
       };
     });
+  };
+
+  addLabel = async label => {
+    const newLabel = {
+      label,
+      color: "red"
+    };
+
+    this.setState(prevState =>  {
+      return {
+        labels: prevState.labels.concat(newLabel)
+      };
+    });
+
+
   };
 
   editTodo = (todo) => {
@@ -78,6 +90,9 @@ class App extends Component {
            <Route
               path="/add" render={() => <AddTodo onAdd={this.addTodo} />}
            />
+           <Route
+              path="/addlabel" render={() => <AddLabel onAddL={this.addLabel} />}
+            />
            <Route
               path="/" exact render={() => <TodoList onEdit={this.editTodo} onRemove={this.removeTodo} todos={todos} />}   
            />   
