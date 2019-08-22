@@ -1,4 +1,11 @@
 import React, {Component} from 'react';
+import {
+    GoCheck
+} from "react-icons/go";
+import {
+    FaTrashAlt
+} from 'react-icons/fa';
+
 
 
 class TodoButtons extends Component {
@@ -16,9 +23,14 @@ class TodoButtons extends Component {
 
         return (
             <>
-            <button type= "button" className= "btn btn-light float-right" 
-            onClick={this.props.onRemove}>
-            DELETE </button>
+            <div className="removeButton">
+            <button type = "button"
+            className = "close"
+            aria-label = "Close"
+            onClick = {this.props.onRemove}><i aria-hidden="true"> < FaTrashAlt /> </i>
+            </button>
+            </div>
+           
             {finishedButton}
             </>
         );

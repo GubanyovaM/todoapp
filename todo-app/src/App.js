@@ -33,9 +33,13 @@ class App extends Component {
   addTodo = async todo => {
     const newTodo = {
       ...todo,
-      createdAt: moment().format('DD.MM.YYYY'),
-      finished: false
+     createdAt: moment().format(),
+     finished: false
     };
+    
+
+    
+
 
     const result = await axios.post('/todos', newTodo);
     newTodo.id = result.data;
@@ -45,10 +49,6 @@ class App extends Component {
         todos: prevState.todos.concat(newTodo)
       };
     });
-      /*({
-      todos: prevState.todos.concat(newTodo)
-    }));*/
-    
   };
 
   editTodo = (todo) => {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import TodoButtons from './TodoButtons';
 import axios from '../axios';
+import moment from 'moment';
+
 
 
 class Todo extends Component {
@@ -12,6 +14,8 @@ class Todo extends Component {
             <div className="card-text" dangerouslySetInnerHTML={{ __html: text }} />
         )
     };
+
+    
 
     handleFinish = async () => {
         await axios.patch('/todos/' + this.props.todo.id, {
@@ -28,33 +32,36 @@ class Todo extends Component {
     };
 
     render() {
-        const { title, createdAt, finished } = this.props.todo;
+        const {
+            title,
+            createdAt,
+            finished
+        } = this.props.todo;
+
+        let createdAtF = moment(createdAt, moment.defaultFormat).format('HH:mm, DD. MMMM YYYY');
+        const diff = moment().diff(moment(createdAt), 'minutes');
+        
         let classes = 'card';
-        if (finished) classes += ' border-warning';
+        (finished) ? ( classes += ' border-finished') : (classes += ' border-unfinished');
 
         return (
             <div className="todo mb-2">
                 <div className = {classes}>
                     <div className="card-body">
                         <h5 className="card-title">
-                            {title}
+                            {title}&nbsp;&nbsp;
+                            {diff <= 10 && finished === false ? (<span className="badge badge-dark">NEW</span>) : null}
+
                         </h5>
                         <h6 className="card-subtitle mb-2 text-muted">
-                            Created at:  {createdAt}
+                            Created at:  {createdAtF}
+    
                         </h6>
                         {this.renderText()}
-                        < TodoButtons todo = {
-                            this.props.todo
-                        }
-                        finished = {
-                            finished
-                        }
-                        onFinish = {
-                            this.handleFinish
-                        }
-                        onRemove = {
-                            this.handleRemove
-                        }
+                        < TodoButtons todo = {this.props.todo}
+                        finished = {finished}
+                        onFinish = {this.handleFinish}
+                        onRemove = {this.handleRemove}
                         />
                         
                     </div>
