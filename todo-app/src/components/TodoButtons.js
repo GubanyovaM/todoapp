@@ -16,8 +16,8 @@ class TodoButtons extends Component {
        
         if (!finished) {
             finishedButton = (
-                <button className = "btn btn-warning" onClick={this.props.onFinish}>
-                FINISH </button>
+                <button className = "finishCheck" onClick={this.props.onFinish}>
+                <i> < GoCheck /></i></button>
             )
         }
 
