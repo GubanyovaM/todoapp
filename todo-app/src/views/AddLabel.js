@@ -17,7 +17,7 @@ class AddLabel extends Component {
 
         handleSubmit = async event => {
             event.preventDefault();
-            await this.props.onAddL(this.state);
+            await this.props.onAdd(this.state);
             console.log(this.state);
             this.setState({
                 label: '',
@@ -29,6 +29,7 @@ class AddLabel extends Component {
         render() {
             const { label, color } = this.state;
             return (
+                <>
                 <form onSubmit={this.handleSubmit} className="form-inline">
                     <div className="form-group mx-sm-2 mb-2">
                     <input 
@@ -51,6 +52,11 @@ class AddLabel extends Component {
                     </button>
                 
                 </form>
+                <div className="labels">
+                <h3>Existing Labels</h3>
+                
+                </div>
+                </>
             )
         }
 }

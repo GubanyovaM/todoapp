@@ -2,6 +2,14 @@
     margin: 0 -10px;
 }
 
+/*.card-body {
+    padding-bottom: 10px;
+}*/
+
+.card-footer {
+    background-color: rgba(240, 241, 241, 0.616);
+}
+
 .todo {
     width: 350px;
     margin-left: 10px;
@@ -23,7 +31,7 @@
 .border-finished {
     border-top-color: rgba(212, 41, 106, 0.692);
     border-top-width: 0.3rem;
-   
+/*   text-decoration: line-through black*/
 }
 
 .border-unfinished {
@@ -48,4 +56,25 @@
  .form-inline .colorBar .form-control {
     width: 70px;
     padding: 0px 1px 0px 1px;
+}
+
+.labels h3 {
+    margin-top: 30px;
+}
+
+
+.low {
+    color: grey;
+}
+
+.medium {
+    color: rgb(255, 230, 0);
+}
+
+.high {
+    color: rgb(245, 93, 23);
+}
+
+.urgent {
+    color:  rgb(255, 0, 64);;
 }

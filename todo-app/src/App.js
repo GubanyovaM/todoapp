@@ -35,7 +35,7 @@ class App extends Component {
     const newTodo = {
       ...todo,
      createdAt: moment().format(),
-     finished: false
+     finished: false,
     };
     
     const result = await axios.post('/todos', newTodo);
@@ -51,8 +51,11 @@ class App extends Component {
   addLabel = async label => {
     const newLabel = {
       label,
-      color: "red"
+      color: ""
     };
+
+    const res2 = await axios.post('/addlabel', newLabel);
+    newLabel = res2.data;
 
     this.setState(prevState =>  {
       return {
@@ -91,7 +94,7 @@ class App extends Component {
               path="/add" render={() => <AddTodo onAdd={this.addTodo} />}
            />
            <Route
-              path="/addlabel" render={() => <AddLabel onAddL={this.addLabel} />}
+              path="/addlabel" render={() => <AddLabel onAdd={this.addLabel} />}
             />
            <Route
               path="/" exact render={() => <TodoList onEdit={this.editTodo} onRemove={this.removeTodo} todos={todos} />}   

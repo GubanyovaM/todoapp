@@ -5,7 +5,9 @@ import { withRouter } from 'react-router-dom';
 class AddTodo extends Component {
         state = {
             title: "",
-            text: ""
+            text: "",
+            importance: ''
+           
         };
 
         handleChange = event => {
@@ -21,14 +23,16 @@ class AddTodo extends Component {
             console.log(this.state);
             this.setState({
                 title: '',
-                text: ''
+                text: '',
+                importance: ''
             });
             this.props.history.push('/');
         };
 
         render() {
-            const { title, text } = this.state;
+            const { title, text, importance } = this.state;
             return (
+            
                 <form onSubmit={this.handleSubmit} className="mb-2">
                     <input 
                         className="form-control mb-2"
@@ -43,11 +47,19 @@ class AddTodo extends Component {
                         placeholder="Text"
                         value={text}
                         onChange={this.handleChange} />
-                    <button type="submit" className="btn btn-outline-warning" disabled={!title}>
+                    <select className="form-control mb-2"  name="importance" value={importance} onChange={this.handleChange}>
+                            <option name="low">LOW</option>
+                            <option name="medium">MEDIUM</option>
+                            <option name="high">HIGH</option>
+                            <option name="urgent">URGENT</option> 
+                    </select>
+                    
+                    <button type="submit" className="btn btn-primary mb-2" disabled={!title}>
                     SAVE
                     </button>
-                
+                 
                 </form>
+               
             )
         }
 }
