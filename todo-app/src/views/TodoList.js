@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Masonry from 'react-masonry-component';
+import { GoPlus } from 'react-icons/go';
+import { Link } from 'react-router-dom';
 
 import Todo from '../components/Todo';
 
@@ -9,6 +11,9 @@ class TodoList extends Component {
 
     return (
       <Masonry className="todos">
+        <Link className="link-plus card plus todo mb-2" to="/add">
+         <GoPlus className="addTodoPlus" /> ADD NEW TASK 
+         </Link>
        {this.props.todos.map((todo) => {
        const handleFinishTodo = () => {
           todo.finished = true;

@@ -76,5 +76,24 @@
 }
 
 .urgent {
-    color:  rgb(255, 0, 64);;
+    color: rgb(114, 4, 46);
+}
+
+.link-plus {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    color : lightgrey;
+    font-weight: bolder;
+    font-size: 0.8rem;
+}
+
+.addTodoPlus {
+    font-size: 2.8rem;
+}
+
+.link-plus:hover  {
+    color: rgba(0, 128, 58, 0.616);
+    text-decoration: none;
 }
