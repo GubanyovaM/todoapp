@@ -6,14 +6,36 @@ class AddTodo extends Component {
         state = {
             title: "",
             text: "",
-            importance: ''
-           
+            importance: '',
+            error: {
+                title: '',
+                text: ''
+            }
         };
 
         handleChange = event => {
             const { name, value } = event.target;
+            let error = this.state.error;
+
+            switch (name) {
+                case 'title': 
+                  error.title = value.length > 15 ? 'dlhyyyy titulok!' : '';
+                  break;
+                case 'text': 
+                  error.text = value.length > 100 ? 'dlhyyyy text!' : '';
+                  break;
+                
+                default:
+                  break;
+              }
+            
+           /*   this.setState({error, [name]: value}, ()=> {
+                  console.log(error)
+              })*/
+
+
             this.setState({
-                [name]: value
+                [name]: value,
             })
         };
 
@@ -24,7 +46,8 @@ class AddTodo extends Component {
             this.setState({
                 title: '',
                 text: '',
-                importance: ''
+                importance: '',
+ 
             });
             this.props.history.push('/');
         };
@@ -32,8 +55,10 @@ class AddTodo extends Component {
         render() {
             const { title, text, importance } = this.state;
             return (
-            
+           
                 <form onSubmit={this.handleSubmit} className="mb-2">
+             
+              
                     <input 
                         className="form-control mb-2"
                         type="text"
@@ -48,6 +73,7 @@ class AddTodo extends Component {
                         value={text}
                         onChange={this.handleChange} />
                     <select className="form-control mb-2"  name="importance" value={importance} onChange={this.handleChange}>
+                            <option name="">Select...</option>
                             <option name="low">LOW</option>
                             <option name="medium">MEDIUM</option>
                             <option name="high">HIGH</option>

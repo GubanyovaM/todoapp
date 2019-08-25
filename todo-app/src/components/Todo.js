@@ -45,13 +45,13 @@ class Todo extends Component {
         (finished) ? ( classes += ' border-finished') : (classes += ' border-unfinished');
 
         let faCircle = 'faCircle';
-        if (importance == "LOW") {
+        if (importance === "LOW") {
                 faCircle += ' low'
-        } else if (importance == "MEDIUM") {
+        } else if (importance === "MEDIUM") {
                 faCircle += ' medium'
-        } else if (importance == "HIGH") {
+        } else if (importance === "HIGH") {
                 faCircle += ' high'
-        } else if (importance == "URGENT") {
+        } else if (importance === "URGENT") {
                 faCircle += ' urgent'
         }; 
 
@@ -74,13 +74,12 @@ class Todo extends Component {
                         onFinish = {this.handleFinish}
                         onRemove = {this.handleRemove}
                         />
-                       
-                       
+       
                     </div>
                 </div>
                 <div className="card-footer">
                      {(importance) ? (<i className={faCircle}> < FaCircle /></i> ) : null }
-                     <h7 className="card-subtitle mb-2 text-muted">&nbsp;&nbsp;{importance}</h7>
+                     <span className="card-subtitle mb-2 text-muted">&nbsp;&nbsp;{importance}</span>
                 </div>
             </div>
         );

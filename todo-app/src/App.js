@@ -3,6 +3,7 @@ import moment from 'moment';
 import axios from './axios';
 import findIndex from 'lodash/findIndex';
 import { HashRouter, Switch, Route } from 'react-router-dom';
+import  { Redirect } from 'react-router-dom';
 
 import AddTodo from './views/AddTodo';
 import TodoList from './views/TodoList';
@@ -11,24 +12,12 @@ import AddLabel from './views/AddLabel';
 
 class App extends Component {
   state = {
-    todos: []
+    todos: [],
   };
 
   async componentDidMount() {
     const result = await axios.get('/todos');
     this.setState({todos: result.data});
-   /* const todos = await axios.get('/todos.json');
-    const result = [];
-    console.log(todos);
-   
-    if (todos.data) Object.keys(todos.data).forEach(key => {
-      const todo = todos.data[key];
-      todo.id = key;
-      result.push(todo)
-    });
-    this.setState({
-      todos: result
-    });*/
   };
 
   addTodo = async todo => {
@@ -37,15 +26,24 @@ class App extends Component {
      createdAt: moment().format(),
      finished: false,
     };
-    
-    const result = await axios.post('/todos', newTodo);
-    newTodo.id = result.data;
 
+  try {
+      const result = await axios.post('/todos', newTodo);
+      newTodo.id = result.data;
+  } catch (error) {
+      console.log(error.message);
+      new Promise ((resolve, reject)=> {
+        throw new Error (error.message);
+      }).catch(alert);
+     
+        return <Redirect to='/'  />
+  }
+ 
     this.setState(prevState =>  {
       return {
-        todos: prevState.todos.concat(newTodo)
-      };
+        todos: prevState.todos.concat(newTodo)};
     });
+  
   };
 
   addLabel = async label => {
@@ -85,7 +83,7 @@ class App extends Component {
 
     return (
       <div className="App p-3">
-
+      
        <HashRouter>
          <Navbar />
          <div className="p-3">
